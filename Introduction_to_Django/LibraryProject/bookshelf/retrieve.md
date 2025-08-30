@@ -1,3 +1,2 @@
 <!--- This code retrieves the Book object. -->
-books = Book.objects.all()
-print(books)
+books = Book.objects.get(1984)
