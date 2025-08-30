@@ -1,2 +1,2 @@
 <!--- This code updates the Book object. -->
-Book.objects.update(title="Nineteen Eighty-Four")
+Book.objects.update(book.title="Nineteen Eighty-Four")
