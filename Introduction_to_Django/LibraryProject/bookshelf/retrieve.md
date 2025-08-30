@@ -1,2 +1,2 @@
 <!--- This code retrieves the Book object. -->
-books = Book.objects.get(1984)
+books = Book.objects.get("1984")
