@@ -4,6 +4,7 @@ for books in Book.objects.all():
     if books.author == "author":
         print(books.title)
 
-Library.objects.get(name="library_name"), books.all()
+library_books= Library.objects.get(name="library_name")
+print(library_books.books.all())
 
 Librarian.objects.get(library="library_name")
