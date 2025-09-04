@@ -18,4 +18,9 @@ class SignUpView(CreateView):
     form_class = UserCreationForm
     template_name = 'templates/relationship_app/register.html'
 
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
 # Create your views here.
