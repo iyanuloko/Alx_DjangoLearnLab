@@ -7,8 +7,8 @@ for books in Book.objects.all():
 library_books = Library.objects.get(name=library_name)
 print(library_books.books.all())
 
-author_books = Book.objects.get(name="author")
+author_books = Book.objects.get(name=author)
 print(author_books.title)
 
-Librarian.objects.get(library="library_name")
+Librarian.objects.get(library=library_name)
 print(library_books.name)
