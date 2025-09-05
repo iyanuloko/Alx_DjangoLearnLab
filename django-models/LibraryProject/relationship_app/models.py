@@ -11,6 +11,8 @@ class Book(models.Model):
     title = models.CharField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
+    def Meta
+
 class Library(models.Model):
     name = models.CharField()
     books = models.ManyToManyField(Book)
