@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Library, Book
+from .models import Library, Book, UserProfile
 from django.views.generic.detail import DetailView
 from django.views.generic import CreateView
 from django.contrib.auth.forms import UserCreationForm
@@ -25,6 +25,16 @@ def register(request):
         if form.is_valid():
             form.save()
 
+def admin_view(request):
+    if request.user.role == 'admin':
+        return render(request, 'relationship_app/admin_view.html')
+
+def is_admin(user):
+    return user.is_authenticated and hasattr(user, "profile") and user.profile.role == "Admin"
+
+@user_passes_test(is_admin)
+def admin_view(request):
+    return render(request, 'relationship_app/admin_view.html')
 
 @user_passes_test(lambda u: u.is_Librarian)
 def librarian_view(request):
