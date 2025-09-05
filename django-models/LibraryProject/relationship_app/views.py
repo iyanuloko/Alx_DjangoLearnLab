@@ -25,12 +25,6 @@ def register(request):
         if form.is_valid():
             form.save()
 
-def is_admin(user):
-    return user.is_authenticated and hasattr(user, "profile") and user.profile.role == "Admin"
-
-@user_passes_test(is_admin)
-def admin_view(request):
-    return render(request, 'relationship_app/admin_view.html')
 
 @user_passes_test(lambda u: u.is_Librarian)
 def librarian_view(request):
