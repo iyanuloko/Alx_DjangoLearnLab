@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Library, Book
@@ -23,4 +24,16 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+
+@user_passes_test(lambda u: u.is_Admin)
+def admin_view(request):
+    return render(request, 'relationship_app/admin_view.html')
+
+@user_passes_test(lambda u: u.is_Librarian)
+def librarian_view(request):
+    return render(request, 'relationship_app/librarian_view.html')
+
+@user_passes_test(lambda u: u.is_Member)
+def member_view(request):
+    return render(request, 'relationship_app/member_view.html')
 # Create your views here.
