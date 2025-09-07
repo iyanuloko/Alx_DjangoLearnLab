@@ -11,7 +11,9 @@ class Book(models.Model):
     title = models.CharField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
-    def Meta
+    class Meta:
+        # this is a permissions tuple.
+        permissions = (("can_add_book", "add book"), ("can_change_book", "change book"), ("can_delete_book", "delete book"))
 
 class Library(models.Model):
     name = models.CharField()
