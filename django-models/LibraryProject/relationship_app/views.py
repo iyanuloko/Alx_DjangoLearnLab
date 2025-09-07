@@ -1,4 +1,5 @@
-from django.contrib.auth.decorators import user_passes_test, permission_required
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Library, Book, UserProfile
@@ -40,15 +41,15 @@ def Librarian(request):
 def Member(request):
     return render(request, 'relationship_app/member_view.html')
 
-@permission_required("can_add_book")
+@permission_required("relationship_app.can_add_book")
 def add_book(request):
     return render(request, 'relationship_app/add_book_view.html')
 
-@permission_required("can_change_book")
+@permission_required("relationship_app.can_change_book")
 def change_book(request):
     return render(request, 'relationship_app/change_book_view.html')
 
-@permission_required("can_delete_book")
+@permission_required("relationship_app.can_delete_book")
 def delete_book(request):
     return render(request, 'relationship_app/delete_book_view.html')
 # Create your views here.
