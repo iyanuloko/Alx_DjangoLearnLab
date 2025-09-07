@@ -27,7 +27,7 @@ def register(request):
             form.save()
 
 def is_admin(user):
-    return user.is_authenticated and user.groups.filter(name="Admin").exists()
+    return user.is_authenticated and  hasattr(user, "userprofile") and user.userprofile.role == "Admin"
 
 @user_passes_test(is_admin)
 def Admin(request):
