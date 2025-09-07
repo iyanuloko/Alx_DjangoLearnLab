@@ -30,11 +30,7 @@ class Librarian(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ROLE_CHOICES = (
-        ("Admin", "Admin"),
-        ("Librarian", "Librarian"),
-        ("Member", "Member"),
-        )
+    
 
 
     def __str__(self):
