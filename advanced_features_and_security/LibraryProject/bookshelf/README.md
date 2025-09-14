@@ -1,0 +1,1 @@
+I created permissions in the book class and added them to groups, then I configured views to only be accessible when users had the permission to use those views.
