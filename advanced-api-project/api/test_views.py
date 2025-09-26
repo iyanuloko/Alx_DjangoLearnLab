@@ -22,3 +22,4 @@ class BookTests(APITestCase):
         data = {'title': '1984', 'publication_year': 1950}
         response = self.client.delete('/api/books/delete/1', data=data, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(response.data, None)
