@@ -1,18 +1,24 @@
-from rest_framework.test import APIRequestFactory, force_authenticate
+from rest_framework import status
+from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
+class BookTests(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='password')
 
-from api.views import CreateView
+    def test_create_book(self):
+        self.client.login(username='testuser', password='password')
+        data = {'title': '1984', 'publication_year': 1949, 'authors': 'George Orwell'}
+        response = self.client.post('/api/books/create/', data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-factory = APIRequestFactory()
-user = User.objects.create_user(username='testuser', password='password')
-request = factory.post('/books/create/', {'title': '1984', 'publication_year': 1979, 'authors': 'James Orwelll'}, format='json')
-request2 = factory.patch('/books/update/', {'authors': 'James Orwell'})
-request3 = factory.delete('/books/1/')
+    def test_update_book(self):
+        self.client.login(username='testuser', password='password')
+        data = {'title': '1984', 'publication_year': 1950}
+        response = self.client.put('/api/books/update/', data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-force_authenticate(request, user=user)
-force_authenticate(request2, user=user)
-force_authenticate(request3, user=user)
-
-view = CreateView.as_view({'post': 'create'})
-response = view(request)
-print(response.status_code)
+    def test_delete_book(self):
+        self.client.login(username='testuser', password='password')
+        data = {'title': '1984', 'publication_year': 1950}
+        response = self.client.delete('/api/books/delete/1', data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
