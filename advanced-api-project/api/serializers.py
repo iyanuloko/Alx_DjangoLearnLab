@@ -9,7 +9,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 # author serializer for name and nested book serializer
 class AuthorSerializer(serializers.ModelSerializer):
-    books = BookSerializer(many=True)
+    books = BookSerializer(many=True, read_only=True)
     class Meta:
        fields = ['name, books']
 # validation function to prevent publication date from being set to the future
