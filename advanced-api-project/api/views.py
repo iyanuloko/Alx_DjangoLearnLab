@@ -7,37 +7,37 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from .models import Book
 from .serializers import BookSerializer
 
-class ListAPIView(generics.ListAPIView):
+class ListView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-class ListCreateAPIView(ReadOnlyModelViewSet):
+class ListAPIView(ReadOnlyModelViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-class DetailAPIView(generics.RetrieveAPIView):
+class DetailView(generics.RetrieveAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-class CreateAPIView(generics.CreateAPIView):
+class CreateView(generics.CreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-class UpdateAPIView(generics.UpdateAPIView):
+class UpdateView(generics.UpdateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-class DeleteAPIView(generics.DestroyAPIView):
+class DeleteView(generics.DestroyAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Book.objects.all()
