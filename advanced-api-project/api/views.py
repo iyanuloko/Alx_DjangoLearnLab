@@ -4,6 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Book
 from .serializers import BookSerializer
+from django_filters import rest_framework
 
 class ListView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
