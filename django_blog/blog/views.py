@@ -10,13 +10,14 @@ class SignUpView(CreateView):
     form_class = SignUpForm
     template_name = 'blog/register.html'
 
-if request.method == 'POST':
-    userpersona = UserProfile.objects.get(user=request.user)
-    userpersona.email = models.EmailField()
-    userpersona.profile_pic = models.ImageField(upload_to="profile_pic", null=True, blank=True)
-    userpersona.save()
+class ProfileView(CreateView):
+    if request.method == 'POST':
+        userpersona = UserProfile.objects.get(user=request.user)
+        userpersona.email = models.EmailField()
+        userpersona.profile_pic = models.ImageField(upload_to="profile_pic", null=True, blank=True)
+        userpersona.save()
 
-    return redirect('profile')
+        return redirect('profile')
 
-return render(request, 'blog/profile.html')
+    return render(request, 'blog/profile.html')
 
