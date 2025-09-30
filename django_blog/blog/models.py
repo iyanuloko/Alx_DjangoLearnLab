@@ -5,4 +5,11 @@ class Post(models.Model):
     content = models.TextField()
     published_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.EmailField()
+    profile_pic = models.ImageField(upload_to="profile_pic", null=True, blank=True)
+    def __str__(self):
+        return self.user.username
 # Create your models here.
