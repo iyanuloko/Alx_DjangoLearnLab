@@ -6,7 +6,7 @@ from .models import UserProfile, Post
 from django.db import models
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+from django.contrib.auth.decorators import login_required
 
 class SignUpView(CreateView):
     form_class = SignUpForm
@@ -31,7 +31,7 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
-
+@login_required(login_url='login')
 class PostCreateView(CreateView):
     model = Post
     template_name = 'blog/post_form.html'
