@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Post Details{% endblock %}
+{% block content %}
+  <h1>Post Details</h1>
+  <ul>
+    {% for post in post_list %}
+      <li>{{ post.title }} by {{ post.author }}</li>
+      <p>{{ post.content }}</p>
+    {% endfor %}
+    </ul>
+{% endblock %}
