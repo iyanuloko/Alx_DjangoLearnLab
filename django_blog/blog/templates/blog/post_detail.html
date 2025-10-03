@@ -7,5 +7,14 @@
       <li>{{ post.title }} by {{ post.author }}</li>
       <p>{{ post.content }}</p>
     {% endfor %}
-    </ul>
+  </ul>
+  <ul>
+    {% for comment in comment_list %}
+      <li>{{ comment.content }} by {{ post.author }}</li>
+    {% endfor %}
+  </ul>
+  <form method="post">
+    {% csrf_token %} {{ form }}
+    <button type="submit">Submit</button>
+  </form>
 {% endblock %}

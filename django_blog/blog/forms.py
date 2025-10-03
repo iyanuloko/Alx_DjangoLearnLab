@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
 from django.contrib.auth.models import User
-from blog.models import Post
+from blog.models import Post, Comment
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField()
@@ -14,3 +14,10 @@ class BlogPostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'author']
+
+class CommentForm(forms.ModelForm):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = forms.CharField(widget=forms.Textarea)
+    class Meta:
+        model = Comment
+        fields = ['author', 'content']

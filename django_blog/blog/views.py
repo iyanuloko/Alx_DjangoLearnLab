@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 from .forms import SignUpForm
 from django.http import request
-from .models import UserProfile, Post
+from .models import UserProfile, Post, Comment
 from django.db import models
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -18,10 +18,6 @@ class ProfileView(LoginRequiredMixin, CreateView):
         userpersona.email = models.EmailField()
         userpersona.profile_pic = models.ImageField(upload_to="profile_pic", null=True, blank=True)
         userpersona.save()
-
-        return redirect('profile')
-
-    return render(request, 'blog/profile.html')
 
 class PostListView(ListView):
     model = Post
@@ -57,3 +53,28 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
+
+class CommentListView(ListView):
+    model = Comment
+    template_name = 'blog/post_detail.html'
+
+@login_required(login_url='login')
+class CommentCreateView(CreateView):
+    model = Comment
+    template_name = 'blog/post_detail.html'
+    fields = ['content']
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(CommentCreateView, self).form_valid(form)
+
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    template_name = 'blog/post_detail.html'
+    fields = ['content']
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(CommentUpdateView, self).form_valid(form)
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = 'blog/post_detail.html'
