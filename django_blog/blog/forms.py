@@ -13,10 +13,13 @@ class BlogPostForm(forms.ModelForm):
     title = forms.CharField(max_length=100)
     content = forms.CharField(widget=forms.Textarea)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    tags = forms.CharField(widget=TagWidget(attrs={'class': 'form-control'}))
+    tags = forms.CharField(widget=TagWidget())
     class Meta:
         model = Post
         fields = ['title', 'content', 'author', 'tags']
+        widgets = {
+            'tags': TagWidget(),
+        }
 
 class CommentForm(forms.ModelForm):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
