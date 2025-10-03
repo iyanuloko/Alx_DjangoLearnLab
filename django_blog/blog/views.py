@@ -80,6 +80,10 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = 'blog/post_detail.html'
 
+class PostByTagListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+
 def search_list(request):
     query = request.GET.get('q')
     if query:
