@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 from .forms import SignUpForm
 from django.http import request
-from .models import UserProfile, Post, Comment
+from .models import UserProfile, Post, Comment, Tag
 from django.db import models
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 class SignUpView(CreateView):
     form_class = SignUpForm
@@ -78,3 +79,14 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = 'blog/post_detail.html'
+
+def search_list(request):
+    query = request.GET.get('q')
+    if query:
+        posts = Post.objects.filter(title__icontains=query)
+        tags = Post.objects.filter(tags__name__icontains=query)
+        contents = Post.objects.filter(content__icontains=query)
+    else:
+        posts = Post.objects.all()
+        tags = Tag.objects.all()
+    return render(request, 'blog/post_list.html', {'posts': posts, 'tags': tags, 'contents': contents})
