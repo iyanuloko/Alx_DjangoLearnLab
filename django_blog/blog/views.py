@@ -89,4 +89,4 @@ def search_list(request):
     else:
         posts = Post.objects.all()
         tags = Tag.objects.all()
-    return render(request, 'blog/post_list.html', {'posts': posts, 'tags': tags, 'contents': contents})
+    return render(request, 'blog/post_search.html', {'posts': posts, 'tags': tags, 'contents': contents})

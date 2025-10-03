@@ -1,0 +1,12 @@
+<form method="get">
+    <input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+  {% for post in posts %}
+    <li>{{ post.title }}</li>
+  {% empty %}
+    <li>No results found.</li>
+  {% endfor %}
+</ul>
