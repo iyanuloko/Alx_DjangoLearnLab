@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     username = models.CharField()
     bio = models.TextField()
-    profile_pic = models.ImageField()
+    profile_picture = models.ImageField()
     followers = models.ManyToManyField(symmetrical=False)
 
 class UserManager(BaseUserManager):
