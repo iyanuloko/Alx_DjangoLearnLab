@@ -1,9 +1,5 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
-from django.http import request
-from .models import User
-from django.db import models
 from rest_framework.authtoken.models import Token
 from rest_framework import generics
 from .serializers import SignUpFormSerializer, ProfileViewSerializer
