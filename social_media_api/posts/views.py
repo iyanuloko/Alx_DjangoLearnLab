@@ -7,8 +7,6 @@ from .serializers import PostSerializer, CommentSerializer
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    def update(self, request, *args, **kwargs):
-        if u
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
