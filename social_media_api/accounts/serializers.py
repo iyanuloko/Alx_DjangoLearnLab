@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import CustomUser
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 
@@ -7,7 +7,7 @@ class SignUpFormSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['username', 'email', 'password']
 
         def validate(self, data):
@@ -21,10 +21,10 @@ class SignUpFormSerializer(serializers.ModelSerializer):
 
 class ProfileViewSerializer(serializers.Serializer):
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['username', 'email', 'password', 'profile_pic', 'bio']
 
 class FollowersSerializer(ProfileViewSerializer):
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['following']

@@ -2,14 +2,14 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     username = models.CharField()
     bio = models.TextField()
     profile_picture = models.ImageField()
-    followers = models.ManyToManyField(symmetrical=False)
-    following = models.ManyToManyField(symmetrical=False)
+    followers = models.ManyToManyField(symmetrical=False, to=CustomUser)
+    following = models.ManyToManyField(symmetrical=False, to=CustomUser)
 
-class UserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password, **kwargs):
         if not username:
             raise ValueError('Users must have a username')
