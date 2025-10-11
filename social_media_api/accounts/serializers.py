@@ -23,3 +23,8 @@ class ProfileViewSerializer(serializers.Serializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'password', 'profile_pic', 'bio']
+
+class FollowersSerializer(ProfileViewSerializer):
+    class Meta:
+        model = User
+        fields = ['following']

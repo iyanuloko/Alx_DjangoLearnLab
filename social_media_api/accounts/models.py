@@ -6,7 +6,8 @@ class User(AbstractUser):
     username = models.CharField()
     bio = models.TextField()
     profile_picture = models.ImageField()
-    followers = models.ManyToManyField(symmetrical=False, to=AbstractUser)
+    followers = models.ManyToManyField(symmetrical=False)
+    following = models.ManyToManyField(symmetrical=False)
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password, **kwargs):
