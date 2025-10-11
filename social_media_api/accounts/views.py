@@ -15,7 +15,7 @@ class SignUpView(generics.CreateAPIView):
 
 class FollowersView(generics.GenericAPIView):
     serializer_class = FollowersSerializer
-    permission_classes = (permissions.IsAuthenticated)
+    permission_classes = [permissions.IsAuthenticated]
     queryset = CustomUser.objects.all()
     def update(self, request, *args, **kwargs):
         if "following" in request.data:
