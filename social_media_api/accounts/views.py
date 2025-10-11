@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.authtoken.models import Token
 from rest_framework import generics, permissions
+from rest_framework.response import Response
 
 from .models import CustomUser
 from .serializers import SignUpFormSerializer, ProfileViewSerializer, FollowersSerializer
@@ -23,4 +24,5 @@ class FollowersView(generics.GenericAPIView):
         if "unfollowing" in request.data:
             request.user.unfollowing.add(request.data["unfollowing"])
             request.user.save()
+        return Response({"message": "Follow list updated successfully."})
 # Create your views here.
