@@ -24,7 +24,7 @@ class UserFeed(generics.ListAPIView):
         serializer = PostSerializer(feed_posts, many=True)
         return Response(serializer.data)
 
-class Like(viewsets.ModelViewSet):
+class Like(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
     def create(self, request, *args, **kwargs):
         post = generics.get_object_or_404(Post, pk=pk)
