@@ -2,9 +2,10 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import generics, permissions
-from .models import Post, Comment
+from .models import Post, Comment, Like
 from .serializers import PostSerializer, CommentSerializer
 from accounts.models import CustomUser
+from notifications.models import Notification
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
@@ -25,9 +26,10 @@ class UserFeed(generics.ListAPIView):
 
 class Like(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
-    def update(self, request, *args, **kwargs)
-        if 'like' in request.data:
-            pass
-        else:
-            request.post.add(request.data["like"])
+    def create(self, request, *args, **kwargs):
+        post = generics.get_object_or_404(Post, pk=pk)
+        Like.objects.get_or_create(user=request.user, post=post)
+        Notification.objects.create()
+        serializer = PostSerializer(post)
+        return Response(serializer.data)
 # Create your views here.
