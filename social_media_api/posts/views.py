@@ -25,9 +25,9 @@ class UserFeed(generics.ListAPIView):
 
 class Like(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
-    if
-    def update(self, request, *args, **kwargs):
-        post = Post.objects.get(pk=kwargs['pk'])
-        post.likes += 1
-        post.save()
+    def update(self, request, *args, **kwargs)
+        if 'like' in request.data:
+            pass
+        else:
+            request.post.add(request.data["like"])
 # Create your views here.
