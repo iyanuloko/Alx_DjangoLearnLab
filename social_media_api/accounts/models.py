@@ -6,8 +6,8 @@ class CustomUser(AbstractUser):
     username = models.CharField()
     bio = models.TextField()
     profile_picture = models.ImageField()
-    followers = models.ManyToManyField(symmetrical=False, to=CustomUser)
-    following = models.ManyToManyField(symmetrical=False, to=CustomUser)
+    followers = models.ManyToManyField('self', symmetrical=False)
+    following = models.ManyToManyField('self', symmetrical=False)
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password, **kwargs):

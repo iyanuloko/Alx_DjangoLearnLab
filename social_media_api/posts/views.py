@@ -22,4 +22,12 @@ class UserFeed(generics.ListAPIView):
         feed_posts = Post.objects.filter(author__in=following_users).order_by('-created_at')
         serializer = PostSerializer(feed_posts, many=True)
         return Response(serializer.data)
+
+class Like(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    if
+    def update(self, request, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs['pk'])
+        post.likes += 1
+        post.save()
 # Create your views here.
